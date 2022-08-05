@@ -12,6 +12,7 @@ const productSchema = new Schema({
     required: true,
   },
   brands: [],
+  advices:{type: Schema.Types.ObjectId, ref: "Advice"}
 });
 
 module.exports = model("Product", productSchema);

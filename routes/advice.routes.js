@@ -21,7 +21,7 @@ router.get('/advices', (req, res, next) => {
 
 
 //  POST /api/advices  -  Creates a new advice
-router.post('/advices', isAuthenticated, (req, res, next) => {
+router.post('/advices/create', isAuthenticated, (req, res, next) => {
   const { title, problemDescription, advice, products: productId } = req.body;
  
   Advice.create({ title, problemDescription, advice, products: [productId] })
