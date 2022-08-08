@@ -11,8 +11,8 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  brands: [],
-  advices:{type: Schema.Types.ObjectId, ref: "Advice"}
+  brands: String,
+  advices:[{type: Schema.Types.ObjectId, ref: "Advice"}]
 });
 
 module.exports = model("Product", productSchema);

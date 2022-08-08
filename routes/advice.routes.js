@@ -20,11 +20,11 @@ router.get('/advices', (req, res, next) => {
 });
 
 
-//  POST /api/advices  -  Creates a new advice
+//  POST -  Creates a new advice
 router.post('/advices/create', isAuthenticated, (req, res, next) => {
-  const { title, problemDescription, advice, products: productId } = req.body;
+  const { title, problemDescription, advice, products } = req.body;
  
-  Advice.create({ title, problemDescription, advice, products: [productId] })
+  Advice.create({ title, problemDescription, advice, products })
   .then(newAdvice => {
     return Product.findByIdAndUpdate(productId, { $push: { advices: newAdvice._id } } );
   })

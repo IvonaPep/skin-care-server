@@ -17,12 +17,14 @@ router.get("/products", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-//  POST /api/products  -  Create a new product
-router.post("/products", isAuthenticated, (req, res, next) => {
-  const { title, description, brands, advices: adviceId } = req.body;
-
-  Product.create({ title, description, brands, advices: [adviceId] })
+//  POST   -  Create a new product
+router.post("/products/create", isAuthenticated, (req, res, next) => {
+  const { title, description, brands, advices } = req.body;
+// console.log(req.body);
+// console.log(adviceId);
+  Product.create({ title, description, brands, advices})
     .then((newProduct) => {
+
       return Advice.findByIdAndUpdate(adviceId, {
         $push: { products: newProduct._id },
       });

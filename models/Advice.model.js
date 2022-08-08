@@ -15,9 +15,6 @@ const adviceSchema = new Schema({
     required: true,
   },
   products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
-  author:{
-    type: {type: Schema.Types.ObjectId, ref: "User"}
-  }
 });
 
 module.exports = model("Advice", adviceSchema);
