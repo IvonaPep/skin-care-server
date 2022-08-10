@@ -9,9 +9,9 @@ const saltRounds = 10;
 
 const User = require("../models/User.model");
 
-router.get("/loggedin", (req, res) => {
-  res.json(req.user);
-});
+// router.get("/loggedin", (req, res) => {
+//   res.json(req.user);
+// });
 
 router.post("/signup", (req, res) => {
   const { username, password } = req.body;
@@ -56,7 +56,7 @@ router.post("/signup", (req, res) => {
       if (error.code === 11000) {
         return res.status(400).json({
           errorMessage:
-            "Username need to be unique. The username you chose is already in use.",
+            "Username need to be unique. The username you chose is already taken.",
         });
       }
       return res.status(500).json({ errorMessage: error.message });

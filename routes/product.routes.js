@@ -57,7 +57,7 @@ router.put("/products/:productId", isAuthenticated, (req, res, next) => {
     return;
   }
 
-  Advice.findByIdAndUpdate(productId, req.body, { new: true })
+  Product.findByIdAndUpdate(productId, req.body, { new: true })
     .then((updatedProduct) => res.json(updatedProduct))
     .catch((error) => res.json(error));
 });
