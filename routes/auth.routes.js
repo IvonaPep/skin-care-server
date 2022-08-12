@@ -83,14 +83,14 @@ router.post("/login", (req, res, next) => {
       if (!user) {
         return res
           .status(400)
-          .json({ errorMessage: "Wrong username. Plese try again." });
+          .json({ errorMessage: "Wrong username. Please try again." });
       }
 
       bcrypt.compare(password, user.password).then((isSamePassword) => {
         if (!isSamePassword) {
           return res
             .status(400)
-            .json({ errorMessage: "Wrong credentials. Plese try again." });
+            .json({ errorMessage: "Wrong password. Please try again." });
         }
 
         const { _id, username } = user;

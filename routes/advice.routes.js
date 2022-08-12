@@ -23,7 +23,6 @@ router.get('/advices', (req, res, next) => {
 //  POST -  Creates a new advice
 router.post('/advices/create', isAuthenticated, (req, res, next) => {
   const { title, problemDescription, advice, products } = req.body;
- 
   Advice.create({ title, problemDescription, advice, products })
   .then(newAdvice => {
     return Product.findByIdAndUpdate(productId, { $push: { advices: newAdvice._id } } );
@@ -44,6 +43,7 @@ router.get('/advices/:adviceId', (req, res, next) => {
 
     
     Advice.findById(adviceId)
+    
         .populate('products')
         .then(advice => res.json(advice))
         .catch(error => res.json(error));
@@ -65,8 +65,9 @@ router.put('/advices/:adviceId', isAuthenticated, (req, res, next) => {
 //DELETE advice
 router.delete ('/advices/:adviceId', isAuthenticated, (req, res, next) => {
     const { adviceId } = req.params;
-
+const advice = Advice.findById(adviceId);
    
+
     if (!mongoose.Types.ObjectId.isValid(adviceId)) {
         res.status(400).json({ message: 'Specified id is not valid' });
         return;
